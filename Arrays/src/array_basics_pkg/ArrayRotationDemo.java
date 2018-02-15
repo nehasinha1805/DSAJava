@@ -1,11 +1,13 @@
 package array_basics_pkg;
 
 /* Reversal Algorithm for array rotation:-
+To reverse array by d positions to the left.
 For arr[] = [1, 2, 3, 4, 5, 6, 7], d =2 and n = 7
 A = [1, 2] and B = [3, 4, 5, 6, 7]
 Reverse A, we get Ar = [2, 1]
 Reverse B, we get Br = [7, 6, 5, 4, 3]
-Reverse all, we get BrAr = [7, 6, 5, 4, 3, 2, 1]
+ArBr = [2, 1, 7, 6, 5, 4, 3]
+Reverse all, we get (ArBr)r = [3, 4, 5, 6, 7, 1, 2]
 */
 public class ArrayRotationDemo {
 
@@ -60,14 +62,17 @@ public class ArrayRotationDemo {
 		System.out.println();
 		
 		// combining data of array Br and Ar to new BrAr array
-		int[] BrAr = new int[n];
-		for(int i = 0; i < n-d; i++) {
-			BrAr[i] = Br[i];
-		}
+		int[] ArBr = new int[n];
 		for(int i = 0; i < d; i++) {
-			BrAr[n-d+i] = Ar[i];
+			ArBr[i] = Ar[i];
 		}
-		return BrAr;
+		for(int i = d; i < n; i++) {
+			ArBr[i] = Br[i-d];
+		}
+		System.out.println("Array ArBr:-");
+		printArray(ArBr);
+		System.out.println();
+		return reverse(ArBr);
 	}
 	
 	public static void main(String[] args) {
